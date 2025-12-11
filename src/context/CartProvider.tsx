@@ -5,15 +5,15 @@ import { useUser } from "./UserContext";
 import { type Product, type Cartitems } from "../types";
 
 export default function CartProvider({ children }: { children: React.ReactNode }) {
+  const { isLoggedIn, token }: { isLoggedIn: boolean; token: string | null } = useUser();
   const [cartItems, setCartItems] = useState<Cartitems>(() => {
     const saved = localStorage.getItem("cartItems");
-    return saved ? JSON.parse(saved) : {};
+    return saved && !isLoggedIn ? JSON.parse(saved) : {};
   });
   const [pendingQuantities, setPendingQuantities] = useState<Cartitems>({});
   const [cartItemsData, setCartItemsData] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [fetched, setFetched] = useState<boolean>(false);
-  const { isLoggedIn, token }: { isLoggedIn: boolean; token: string | null } = useUser();
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -26,10 +26,6 @@ export default function CartProvider({ children }: { children: React.ReactNode }
           setCartItems({});
           setFetched(true);
         });
-    } else {
-      const saved = localStorage.getItem("cartItems");
-      setCartItems(saved ? JSON.parse(saved) : {});
-      setFetched(true);
     }
   }, [isLoggedIn, token]);
 
@@ -45,11 +41,11 @@ export default function CartProvider({ children }: { children: React.ReactNode }
 
   useEffect(() => {
     if (itemIds.length === 0) {
-      setCartItemsData([]);
+      Promise.resolve().then(() => setCartItemsData([]));
       if (!fetched && isLoggedIn) {
         return;
       }
-      setLoading(false);
+      Promise.resolve().then(() => setLoading(false));
       return;
     }
 

@@ -22,8 +22,10 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
           setLoading(false);
         });
     } else {
-      setUser(null);
-      setLoading(false);
+      Promise.resolve().then(() => {
+        setUser(null);
+        setLoading(false);
+      });
     }
   }, [token]);
 

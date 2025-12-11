@@ -94,7 +94,7 @@ CodeYogi-Lecture-78/
 │   ├── api.ts               # API client configuration
 │   ├── App.tsx              # Main app component
 │   ├── index.css            # Global styles
-│   ├── main.jsx             # App entry point
+│   ├── main.tsx             # App entry point
 │   └── types.ts             # Type definitions
 ├── eslint.config.js         # ESLint configuration
 ├── index.html               # HTML template

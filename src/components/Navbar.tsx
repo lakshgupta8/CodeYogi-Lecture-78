@@ -29,7 +29,7 @@ function Navbar() {
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
 
   useEffect(() => {
-    closeMobileMenu();
+    Promise.resolve().then(() => closeMobileMenu());
   }, [location, closeMobileMenu]);
 
   useEffect(() => {
