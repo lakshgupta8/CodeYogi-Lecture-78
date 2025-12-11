@@ -5,7 +5,7 @@ import Input from "../components/Input";
 import { signupUser } from "../api";
 import { useUser } from "../context/UserContext";
 import { useAlert } from "../context/AlertContext";
-import type { User } from "../types";
+import type { AlertProps, User } from "../types";
 
 const validationSchema = Yup.object().shape({
   Name: Yup.string().required("Name is required"),
@@ -171,7 +171,7 @@ export const SignUpPageContent = ({
 const EnhancedSignUpPage = withFormik({
   mapPropsToValues: () => initialValues,
   validationSchema: validationSchema,
-  handleSubmit: (values, { setSubmitting, props }: { setSubmitting: (submitting: boolean) => void; props: { navigate: (to: string) => void; login: (user: User, token: string) => void; showAlert: (message: string, type: string) => void; }; }) => {
+  handleSubmit: (values, { setSubmitting, props }: { setSubmitting: (submitting: boolean) => void; props: { navigate: (to: string) => void; login: (user: User, token: string) => void; showAlert: (message: string, type: AlertProps["type"]) => void; }; }) => {
     const { navigate, login, showAlert } = props;
 
     signupUser(values.Name.split(" ")[0], values.email, values.password)

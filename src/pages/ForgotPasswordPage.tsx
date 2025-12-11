@@ -3,13 +3,7 @@ import { useAlert } from "../context/AlertContext";
 import { withFormik } from "formik";
 import * as Yup from "yup";
 import Input from "../components/Input";
-
-function callForgotPasswordApi(values: { email: string }, { setSubmitting, props }: { setSubmitting: (submitting: boolean) => void; props: { navigate: (to: string) => void; showAlert: (message: string, type: string) => void; }; }) {
-  const { navigate, showAlert } = props;
-  showAlert(`Password reset link sent to ${values.email}`, "success");
-  navigate("/login");
-  setSubmitting(false);
-}
+import { type AlertProps } from "../types";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -100,7 +94,12 @@ export const ForgotPasswordPageContent = ({
 const EnhancedForgotPasswordPage = withFormik({
   mapPropsToValues: () => initialValues,
   validationSchema: validationSchema,
-  handleSubmit: callForgotPasswordApi,
+  handleSubmit: (values, { setSubmitting, props }: { setSubmitting: (submitting: boolean) => void; props: { navigate: (to: string) => void; showAlert: (message: string, type?: AlertProps["type"]) => void; }; }) => {
+    const { navigate, showAlert } = props;
+    showAlert(`Password reset link sent to ${values.email}`, "success");
+    navigate("/login");
+    setSubmitting(false);
+  },
   validateOnMount: true,
 })(ForgotPasswordPageContent);
 

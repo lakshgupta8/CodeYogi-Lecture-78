@@ -1,14 +1,17 @@
-# AwesomeBuy.com 🛒
+# AwesomeBuy.com 🛒 (TypeScript)
 
-An e-commerce web application built with React, Vite, and Tailwind CSS featuring user authentication, product browsing, shopping cart functionality, and 10-minute same-day delivery.
+An e-commerce web application built with React, TypeScript, Vite, and Tailwind CSS featuring user authentication, product browsing, shopping cart functionality, and 10-minute same-day delivery.
 
 ### 🌐 Live Preview
 
-Check out the live demo here: [AwesomeBuy](https://codeyogi-lecture-77.netlify.app/)
+Check out the live demo here: [AwesomeBuy](https://codeyogi-lecture-78.netlify.app/)
 
 ### Implementation Notes
 
+- **TypeScript Migration**: The entire codebase has been migrated to TypeScript for better type safety and developer experience.
 - **Modern Approach**: Higher-Order Components (HOCs) are avoided in favor of Custom Hooks, which are considered a more modern and overall better way of React programming.
+- **Robust Error Handling**: Comprehensive error handling for API calls and user interactions.
+- **Optimized Performance**: Improved state management and reduced unnecessary re-renders.
 
 ## 🌟 Features
 
@@ -31,7 +34,8 @@ Check out the live demo here: [AwesomeBuy](https://codeyogi-lecture-77.netlify.a
 
 ## 🛠️ Tech Stack
 
-- **Frontend Framework**: [React](https://reactjs.org/) (v18+)
+- **Language**: [TypeScript](https://www.typescriptlang.org/) (v5+)
+- **Frontend Framework**: [React](https://reactjs.org/) (v19+)
 - **Build Tool**: [Vite](https://vitejs.dev/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Routing**: [React Router DOM](https://reactrouter.com/)
@@ -44,70 +48,76 @@ Check out the live demo here: [AwesomeBuy](https://codeyogi-lecture-77.netlify.a
 ## 📁 Project Structure
 
 ```
-CodeYogi-Lecture-77/
+CodeYogi-Lecture-78/
 ├── src/
 │   ├── components/          # Reusable UI components
-│   │   ├── Navbar.jsx
-│   │   ├── Footer.jsx
-│   │   ├── ProductCard.jsx
-│   │   ├── ProductGrid.jsx
-│   │   ├── CartList.jsx
-│   │   ├── CartRow.jsx
-│   │   ├── CartTotals.jsx
-│   │   ├── Filter.jsx
-│   │   ├── Pagination.jsx
-│   │   ├── Loading.jsx
-│   │   ├── UserRoute.jsx    # Protected route wrapper
+│   │   ├── Navbar.tsx
+│   │   ├── Footer.tsx
+│   │   ├── ProductCard.tsx
+│   │   ├── ProductGrid.tsx
+│   │   ├── CartList.tsx
+│   │   ├── CartRow.tsx
+│   │   ├── CartTotals.tsx
+│   │   ├── Filter.tsx
+│   │   ├── Pagination.tsx
+│   │   ├── Loading.tsx
+│   │   ├── UserRoute.tsx    # Protected route wrapper
 │   │   └── ...
 │   ├── pages/               # Page components
-│   │   ├── HomePage.jsx
-│   │   ├── ProductDetailPage.jsx
-│   │   ├── CartPage.jsx
-│   │   ├── LoginPage.jsx
-│   │   ├── SignUpPage.jsx
-│   │   ├── ForgotPasswordPage.jsx
-│   │   └── DashboardPage.jsx
+│   │   ├── HomePage.tsx
+│   │   ├── ProductDetailPage.tsx
+│   │   ├── CartPage.tsx
+│   │   ├── LoginPage.tsx
+│   │   ├── SignUpPage.tsx
+│   │   ├── ForgotPasswordPage.tsx
+│   │   └── DashboardPage.tsx
 │   ├── context/             # React Context providers
-│   │   ├── CartContext.js
-│   │   ├── CartProvider.jsx
-│   │   ├── UserContext.js
-│   │   └── UserProvider.jsx
-│   ├── hooks/               # Custom React hooks
-│   ├── api.js               # API client configuration
-│   ├── App.jsx              # Main app component
-│   └── main.jsx             # App entry point
+│   │   ├── AlertContext.ts
+│   │   ├── AlertProvider.tsx
+│   │   ├── CartContext.ts
+│   │   ├── CartProvider.tsx
+│   │   ├── UserContext.ts
+│   │   └── UserProvider.tsx
+│   ├── api.ts               # API client configuration
+│   ├── App.tsx              # Main app component
+│   ├── index.css            # Global styles
+│   ├── main.jsx             # App entry point
+│   └── types.ts             # Type definitions
 ├── public/                  # Static assets
-├── index.html
-├── vite.config.js
-└── package.json
+│   ├── images/
+│   └── _redirects           # Netlify redirects
+├── vite.config.js           # Vite configuration
+├── tsconfig.json            # TypeScript configuration
+├── eslint.config.js         # ESLint configuration
+└── package.json             # Project dependencies
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
-- pnpm (or npm/yarn)
+- Node.js (v25 or higher)
+- bun (or npm/yarn/pnpm)
 
 ### Installation
 
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/lakshgupta8/CodeYogi-Lecture-77
-   cd "CodeYogi-Lecture-77"
+   git clone https://github.com/lakshgupta8/CodeYogi-Lecture-78
+   cd "CodeYogi-Lecture-78"
    ```
 
 2. **Install dependencies**
 
    ```bash
-   npm/pnpm/bun install
+   bun install
    ```
 
 3. **Start the development server**
 
    ```bash
-   npm/pnpm/bun run dev
+   bun run dev
    ```
 
 4. **Open your browser**
@@ -156,8 +166,6 @@ The application connects to a backend API for:
 - User authentication
 - Cart operations
 - Order management
-
-API base URL: `https://r5ftltl6sj.execute-api.us-east-1.amazonaws.com`
 
 ## 🎨 UI Components
 
@@ -215,7 +223,7 @@ This project is part of the CodeYogi Lecture series.
 
 ## 👨‍💻 Developer
 
-Created as part of CodeYogi Non-Assignment Lectures - 77.
+Created as part of CodeYogi Non-Assignment Lectures - 78.
 
 ---
 

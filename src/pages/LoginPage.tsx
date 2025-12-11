@@ -5,7 +5,7 @@ import Input from "../components/Input";
 import { useUser } from "../context/UserContext";
 import { useAlert } from "../context/AlertContext";
 import { signInUser } from "../api";
-import { type User } from "../types";
+import type { AlertProps, User } from "../types";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -131,7 +131,7 @@ export const LoginPageContent = ({
 const EnhancedLoginPage = withFormik({
   mapPropsToValues: () => initialValues,
   validationSchema: validationSchema,
-  handleSubmit: (values, { setSubmitting, props }: { setSubmitting: (submitting: boolean) => void; props: { navigate: (to: string) => void; login: (user: User, token: string) => void; showAlert: (message: string, type: string) => void; }; }) => {
+  handleSubmit: (values, { setSubmitting, props }: { setSubmitting: (submitting: boolean) => void; props: { navigate: (to: string) => void; login: (user: User, token: string) => void; showAlert: (message: string, type: AlertProps["type"]) => void; }; }) => {
     const { navigate, login, showAlert } = props;
     signInUser(values.email, values.password)
       .then(({ user, token }) => {

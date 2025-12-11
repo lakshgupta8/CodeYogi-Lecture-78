@@ -3,7 +3,7 @@ import { type AlertProps } from "../types";
 
 interface AlertContextType {
   alert?: AlertProps;
-  showAlert: (message: string, type?: string) => void;
+  showAlert: (message: string, type?: AlertProps["type"]) => void;
   removeAlert: () => void;
 }
 

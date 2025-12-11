@@ -12,7 +12,7 @@ function AlertProvider({ children }: { children: React.ReactNode }) {
     setFading(false);
   }, []);
 
-  const showAlert = useCallback((message: string, type = "info") => {
+  const showAlert = useCallback((message: string, type: AlertProps["type"] = "info") => {
     setAlert({ message, type });
     setFading(false);
   }, []);

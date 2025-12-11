@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import StarRating from "./StarRating";
+import { type ProductCardProps } from "../types";
 
 function ProductCard({
   id,
@@ -11,7 +12,7 @@ function ProductCard({
   thumbnail,
   rating,
   contextIdList,
-}) {
+}: ProductCardProps) {
   const location = useLocation();
   const originalPrice = (price * 100) / (100 - discountPercentage);
 

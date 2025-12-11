@@ -61,9 +61,19 @@ export type User = {
 export type Cartitems = Record<string, number>;
 
 export interface AlertProps {
-    type?: string;
+    type?: "success" | "error" | "info" | "warning";
     message?: string;
     onDismiss?: () => void;
     fading?: boolean;
 }
 
+export type ProductCardProps = {
+    id: number;
+    title: string;
+    category: string;
+    price: number;
+    discountPercentage: number;
+    thumbnail: string;
+    rating: number;
+    contextIdList: number[];
+};
