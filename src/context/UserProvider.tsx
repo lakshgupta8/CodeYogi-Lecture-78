@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { UserContext } from "./UserContext";
-import axios from "axios";
+import { getAuthUser } from "../api";
 import { type User } from "../types";
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -10,14 +10,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (token) {
-      axios
-        .get("https://r5ftltl6sj.execute-api.us-east-1.amazonaws.com/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+      getAuthUser(token)
         .then((response) => {
-          setUser(response.data.user);
+          setUser(response.user);
           setLoading(false);
         })
         .catch(() => {

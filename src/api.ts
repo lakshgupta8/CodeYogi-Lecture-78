@@ -1,6 +1,14 @@
 import axios from "axios";
 import { type Cartitems } from "./types";
 
+function handleAxiosError(error: unknown) {
+  if (axios.isAxiosError(error) && error.response) {
+    const errorMessage = error.response.data?.message || "An error occurred";
+    throw new Error(errorMessage);
+  }
+  throw error;
+}
+
 export function getProductList(sortBy: string, order: string, page: number) {
   let url = "https://dummyjson.com/products?limit=12";
   if (sortBy && order) {
@@ -12,38 +20,22 @@ export function getProductList(sortBy: string, order: string, page: number) {
   return axios
     .get(url)
     .then((response) => response.data)
-    .catch((error) => {
-      if (axios.isAxiosError(error) && error.response) {
-        const errorMessage =
-          error.response.data?.message || "An error occurred";
-        throw new Error(errorMessage);
-      }
-      throw error;
-    });
+    .catch(handleAxiosError);
 }
 
 export function getProduct(id: number) {
   return axios
     .get(`https://dummyjson.com/products/${id}`)
     .then((response) => response.data)
-    .catch((error) => {
-      if (axios.isAxiosError(error) && error.response) {
-        const errorMessage =
-          error.response.data?.message || "An error occurred";
-        throw new Error(errorMessage);
-      }
-      throw error;
-    });
+    .catch(handleAxiosError);
 }
 
-// url doesnt work now, will get it back if possible
-// export function getCartProducts(ids: number[]) {
-//   const commaSeparatedIds = ids.join(",");
-//   const url = `https://r5ftltl6sj.execute-api.us-east-1.amazonaws.com/products/bulk?ids=[${commaSeparatedIds}]`;
-//   return axios.get(url).then((response) => response.data.products);
-// }
-
-export function searchProducts(query: string, sortBy: string, order: string, page: number) {
+export function searchProducts(
+  query: string,
+  sortBy: string,
+  order: string,
+  page: number
+) {
   let url = `https://dummyjson.com/products/search?q=${query}&limit=12`;
   if (sortBy && order) {
     url += `&sortBy=${sortBy}&order=${order}`;
@@ -54,14 +46,7 @@ export function searchProducts(query: string, sortBy: string, order: string, pag
   return axios
     .get(url)
     .then((response) => response.data)
-    .catch((error) => {
-      if (axios.isAxiosError(error) && error.response) {
-        const errorMessage =
-          error.response.data?.message || "An error occurred";
-        throw new Error(errorMessage);
-      }
-      throw error;
-    });
+    .catch(handleAxiosError);
 }
 
 export function getProductIds(sortBy: string, order: string) {
@@ -72,14 +57,7 @@ export function getProductIds(sortBy: string, order: string) {
   return axios
     .get(url)
     .then((response) => response.data)
-    .catch((error) => {
-      if (axios.isAxiosError(error) && error.response) {
-        const errorMessage =
-          error.response.data?.message || "An error occurred";
-        throw new Error(errorMessage);
-      }
-      throw error;
-    });
+    .catch(handleAxiosError);
 }
 
 export function searchProductIds(query: string, sortBy: string, order: string) {
@@ -90,14 +68,7 @@ export function searchProductIds(query: string, sortBy: string, order: string) {
   return axios
     .get(url)
     .then((response) => response.data)
-    .catch((error) => {
-      if (axios.isAxiosError(error) && error.response) {
-        const errorMessage =
-          error.response.data?.message || "An error occurred";
-        throw new Error(errorMessage);
-      }
-      throw error;
-    });
+    .catch(handleAxiosError);
 }
 
 export function signupUser(firstName: string, email: string, password: string) {
@@ -123,14 +94,7 @@ export function signupUser(firstName: string, email: string, password: string) {
       }
       return response.data;
     })
-    .catch((error) => {
-      if (axios.isAxiosError(error) && error.response) {
-        const errorMessage =
-          error.response.data?.message || "An error occurred";
-        throw new Error(errorMessage);
-      }
-      throw error;
-    });
+    .catch(handleAxiosError);
 }
 
 export function signInUser(email: string, password: string) {
@@ -155,14 +119,29 @@ export function signInUser(email: string, password: string) {
       }
       return response.data;
     })
-    .catch((error) => {
-      if (axios.isAxiosError(error) && error.response) {
-        const errorMessage =
-          error.response.data?.message || "An error occurred";
+    .catch(handleAxiosError);
+}
+
+export function getAuthUser(token: string) {
+  const url = "https://r5ftltl6sj.execute-api.us-east-1.amazonaws.com/me";
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    validateStatus: () => true,
+  };
+
+  return axios
+    .get(url, config)
+    .then((response) => {
+      if (response.status >= 400) {
+        const errorMessage = response.data?.message || "An error occurred";
         throw new Error(errorMessage);
       }
-      throw error;
-    });
+      return response.data;
+    })
+    .catch(handleAxiosError);
 }
 
 export function saveCart(cart: Cartitems, token: string) {
@@ -184,14 +163,7 @@ export function saveCart(cart: Cartitems, token: string) {
       }
       return response.data;
     })
-    .catch((error) => {
-      if (axios.isAxiosError(error) && error.response) {
-        const errorMessage =
-          error.response.data?.message || "An error occurred";
-        throw new Error(errorMessage);
-      }
-      throw error;
-    });
+    .catch(handleAxiosError);
 }
 
 export function getCart(token: string) {
@@ -213,12 +185,5 @@ export function getCart(token: string) {
       }
       return response.data;
     })
-    .catch((error) => {
-      if (axios.isAxiosError(error) && error.response) {
-        const errorMessage =
-          error.response.data?.message || "An error occurred";
-        throw new Error(errorMessage);
-      }
-      throw error;
-    });
+    .catch(handleAxiosError);
 }

@@ -49,28 +49,33 @@ Check out the live demo here: [AwesomeBuy](https://codeyogi-lecture-78.netlify.a
 
 ```
 CodeYogi-Lecture-78/
+├── public/                  # Static assets
+│   ├── images/
+│   └── _redirects           # Netlify redirects
 ├── src/
 │   ├── components/          # Reusable UI components
-│   │   ├── Navbar.tsx
-│   │   ├── Footer.tsx
-│   │   ├── ProductCard.tsx
-│   │   ├── ProductGrid.tsx
+│   │   ├── Alert.tsx
+│   │   ├── AuthRoute.tsx
+│   │   ├── CartDetails.tsx
 │   │   ├── CartList.tsx
 │   │   ├── CartRow.tsx
 │   │   ├── CartTotals.tsx
+│   │   ├── EmptyCart.tsx
 │   │   ├── Filter.tsx
-│   │   ├── Pagination.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Input.tsx
 │   │   ├── Loading.tsx
-│   │   ├── UserRoute.tsx    # Protected route wrapper
+│   │   ├── LoadingProduct.tsx
+│   │   ├── MobileMenu.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── NoMatch.tsx
+│   │   ├── NotFound.tsx
+│   │   ├── ProductCard.tsx
+│   │   ├── ProductGrid.tsx
+│   │   ├── Providers.tsx
+│   │   ├── StarRating.tsx
+│   │   ├── UserRoute.tsx
 │   │   └── ...
-│   ├── pages/               # Page components
-│   │   ├── HomePage.tsx
-│   │   ├── ProductDetailPage.tsx
-│   │   ├── CartPage.tsx
-│   │   ├── LoginPage.tsx
-│   │   ├── SignUpPage.tsx
-│   │   ├── ForgotPasswordPage.tsx
-│   │   └── DashboardPage.tsx
 │   ├── context/             # React Context providers
 │   │   ├── AlertContext.ts
 │   │   ├── AlertProvider.tsx
@@ -78,18 +83,24 @@ CodeYogi-Lecture-78/
 │   │   ├── CartProvider.tsx
 │   │   ├── UserContext.ts
 │   │   └── UserProvider.tsx
+│   ├── pages/               # Page components
+│   │   ├── CartPage.tsx
+│   │   ├── DashboardPage.tsx
+│   │   ├── ForgotPasswordPage.tsx
+│   │   ├── LoginPage.tsx
+│   │   ├── ProductDetailPage.tsx
+│   │   ├── ProductsPage.tsx
+│   │   └── SignUpPage.tsx
 │   ├── api.ts               # API client configuration
 │   ├── App.tsx              # Main app component
 │   ├── index.css            # Global styles
 │   ├── main.jsx             # App entry point
 │   └── types.ts             # Type definitions
-├── public/                  # Static assets
-│   ├── images/
-│   └── _redirects           # Netlify redirects
-├── vite.config.js           # Vite configuration
-├── tsconfig.json            # TypeScript configuration
 ├── eslint.config.js         # ESLint configuration
-└── package.json             # Project dependencies
+├── index.html               # HTML template
+├── package.json             # Project dependencies
+├── tsconfig.json            # TypeScript configuration
+└── vite.config.js           # Vite configuration
 ```
 
 ## 🚀 Getting Started
@@ -97,7 +108,7 @@ CodeYogi-Lecture-78/
 ### Prerequisites
 
 - Node.js (v25 or higher)
-- bun (or npm/yarn/pnpm)
+- bun.js (or npm/yarn/pnpm)
 
 ### Installation
 
