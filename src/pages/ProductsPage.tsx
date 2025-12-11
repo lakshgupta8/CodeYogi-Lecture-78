@@ -42,7 +42,7 @@ function ProductsPage() {
 
   useEffect(
     function () {
-      setLoading(true);
+      Promise.resolve().then(() => setLoading(true));
       const promise = query
         ? searchProducts(query, sortBy, order, page)
         : getProductList(sortBy, order, page);
