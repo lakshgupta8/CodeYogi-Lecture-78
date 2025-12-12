@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, type FC } from "react";
 import { useParams, useLocation, Link } from "react-router-dom";
 import {
   HiArrowSmLeft,
@@ -11,7 +11,7 @@ import LoadingProduct from "../components/LoadingProduct";
 import { getProduct } from "../api";
 import { type Product } from "../types";
 
-const ProductDetailPage = () => {
+const ProductDetailPage: FC = () => {
   const id = +(useParams().id || 1);
   const location = useLocation();
   const { addToCart } = useCart();

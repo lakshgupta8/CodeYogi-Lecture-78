@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, type FC } from "react";
 import { UserContext } from "./UserContext";
 import { getAuthUser } from "../api";
 import { type User } from "../types";
 
-export const UserProvider = ({ children }: { children: React.ReactNode }) => {
+const UserProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
   const [loading, setLoading] = useState<boolean>(true);
@@ -12,7 +12,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     if (token) {
       getAuthUser(token)
         .then((response) => {
-          setUser(response.user);
+          setUser(response.user || null);
           setLoading(false);
         })
         .catch(() => {

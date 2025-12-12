@@ -1,8 +1,9 @@
 import { memo, useMemo } from "react";
 import { useCart } from "../context/CartContext";
 import CartRow from "./CartRow";
+import { type FC } from "react";
 
-function CartList() {
+const CartList: FC = () => {
   const { cartItemsData } = useCart();
 
   const rows = useMemo(

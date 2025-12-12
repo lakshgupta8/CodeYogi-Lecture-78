@@ -1,11 +1,11 @@
-import { useState, useEffect, useMemo, useCallback, memo } from "react";
+import { useState, useEffect, useMemo, useCallback, memo, type FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HiOutlineShoppingBag, HiOutlineViewList } from "react-icons/hi";
 import { useCart } from "../context/CartContext";
 import { useUser } from "../context/UserContext";
 import MobileMenu from "./MobileMenu";
 
-function Navbar() {
+const Navbar: FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const { count } = useCart();

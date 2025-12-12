@@ -1,16 +1,15 @@
-import { memo, useMemo, useCallback } from "react";
+import { memo, useMemo, useCallback, type FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { TiDeleteOutline } from "react-icons/ti";
 import { useCart } from "../context/CartContext";
 import { type Product } from "../types";
 
-function CartRow(props: { item: Product }) {
-  const { item } = props;
-  const { updateQuantity, removeFromCart, getItemSubtotal, cartItems } =
+const CartRow: FC<{ item: Product }> = ({ item }) => {
+  const { updateQuantity, removeFromCart, getItemSubtotal, cartItems, cartItemsData } =
     useCart();
-  const quantity = item.quantity ?? 1;
-  const savedQuantity = cartItems[item.id] ?? item.quantity ?? 1;
-  const subtotal = useMemo(
+  const quantity: number = item.quantity ?? 1;
+  const savedQuantity: number = cartItems[item.id] ?? quantity;
+  const subtotal: number = useMemo(
     function () {
       const result = getItemSubtotal(item.price, savedQuantity);
       return result ?? 0;
@@ -34,8 +33,8 @@ function CartRow(props: { item: Product }) {
     [removeFromCart, item.id]
   );
 
-  const ids = Object.keys(cartItems).map(function (id) {
-    return { id: Number(id) };
+  const ids = cartItemsData.map(function (item) {
+    return { id: item.id };
   });
 
   const location = useLocation();

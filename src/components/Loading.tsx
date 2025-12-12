@@ -1,6 +1,7 @@
 import { ImSpinner9 } from "react-icons/im";
+import { type FC } from "react";
 
-function Loading() {
+const Loading: FC = () => {
   return (
     <div className="flex flex-col justify-center items-center mb-22 py-12">
       <ImSpinner9 className="opacity-75 text-primary-medium text-3xl animate-spin" />

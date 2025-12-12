@@ -1,8 +1,9 @@
 import { Navigate } from "react-router-dom";
 import Loading from "./Loading";
 import { useUser } from "../context/UserContext";
+import { type FC } from "react";
 
-const AuthRoute = ({ children }: { children: React.ReactNode }) => {
+const AuthRoute: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isLoggedIn, loading } = useUser();
 
   if (loading) {

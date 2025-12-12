@@ -33,7 +33,7 @@ export interface Product {
     quantity?: number;
 }
 
-export interface Review {
+interface Review {
     rating: number;
     comment: string;
     reviewerName: string;
@@ -47,6 +47,15 @@ export interface ProductList {
     limit: number;
 }
 
+export type ProductIds = {
+    products: {
+        id: number
+    }[];
+    total: number;
+    skip: number;
+    limit: number;
+};
+
 export type User = {
     id: string;
     email: string;
@@ -54,8 +63,20 @@ export type User = {
     lastSeen: number;
     role: "student" | "admin" | "teacher";
     preferredLanguage: string;
+    entity?: string;
     created: string;
     modified: string;
+};
+
+export type AuthResponse = {
+    user?: User;
+    token?: string;
+    message?: string;
+};
+
+export type CartResponse = {
+    cart?: Cartitems;
+    message?: string;
 };
 
 export type Cartitems = Record<string, number>;
@@ -67,13 +88,22 @@ export interface AlertProps {
     fading?: boolean;
 }
 
-export type ProductCardProps = {
-    id: number;
-    title: string;
-    category: string;
-    price: number;
-    discountPercentage: number;
-    thumbnail: string;
-    rating: number;
-    contextIdList: number[];
+export interface FormProps {
+    values: { email: string, password?: string, Name?: string, confirmPassword?: string };
+    errors: { email?: string, password?: string, Name?: string, confirmPassword?: string };
+    touched: { email?: boolean, password?: boolean, Name?: boolean, confirmPassword?: boolean };
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+    isSubmitting: boolean;
+    isValid: boolean;
+};
+
+export interface FormikSubmitProps {
+    setSubmitting: (submitting: boolean) => void;
+    props: {
+        navigate: (to: string) => void;
+        login?: (user: User, token: string) => void;
+        showAlert: (message: string, type: AlertProps["type"]) => void;
+    };
 };

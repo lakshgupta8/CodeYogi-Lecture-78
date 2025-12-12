@@ -1,7 +1,7 @@
-import { memo } from "react";
+import { memo, type FC } from "react";
 import { useCart } from "../context/CartContext";
 
-function CartTotals() {
+const CartTotals: FC = () => {
   const { subtotal } = useCart();
   return (
     <div className="md:ml-auto border border-gray-300 md:w-2/5 text-gray-800">

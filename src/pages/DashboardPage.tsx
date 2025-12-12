@@ -1,9 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { type FC } from "react";
+import { Link, useNavigate, } from "react-router-dom";
 import { FaUser, FaBoxOpen, FaHeart, FaCog } from "react-icons/fa";
 import { useUser } from "../context/UserContext";
 import { useAlert } from "../context/AlertContext";
 
-const Dashboard = () => {
+const Dashboard: FC = () => {
   const { user, logout } = useUser();
   const navigate = useNavigate();
   const { showAlert } = useAlert();

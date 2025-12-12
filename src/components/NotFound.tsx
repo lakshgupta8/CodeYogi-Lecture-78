@@ -1,8 +1,8 @@
-import { memo } from "react";
+import { memo, type FC } from "react";
 import { Link } from "react-router-dom";
 import notfoundimage from "/images/404notfound.jpg";
 
-function NotFound() {
+const NotFound: FC = () => {
   return (
     <div className="flex flex-col items-center gap-4 bg-white mx-auto my-16 py-6 max-w-xl sm:max-w-2xl md:max-w-4xl lg:max-w-6xl text-center">
       <img src={notfoundimage} alt="404 Not Found" className="w-40 h-40" />

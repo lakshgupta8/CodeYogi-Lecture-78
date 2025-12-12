@@ -1,9 +1,9 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, type FC } from "react";
 import { AlertContext } from "./AlertContext";
 import Alert from "../components/Alert";
 import { type AlertProps } from "../types";
 
-function AlertProvider({ children }: { children: React.ReactNode }) {
+const AlertProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const [alert, setAlert] = useState<AlertProps | undefined>(undefined);
   const [fading, setFading] = useState(false);
 

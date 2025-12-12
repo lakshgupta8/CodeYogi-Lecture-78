@@ -1,3 +1,4 @@
+import { type FC } from "react";
 import {
   HiCheckCircle,
   HiXCircle,
@@ -21,7 +22,7 @@ const icons = {
   warning: <HiExclamation className="w-5 h-5" />,
 };
 
-function Alert({ type = "info", message, onDismiss, fading }: AlertProps) {
+const Alert: FC<AlertProps> = ({ type = "info", message, onDismiss, fading }) => {
   if (!message) return null;
 
   const typeClass = themeClasses[type];

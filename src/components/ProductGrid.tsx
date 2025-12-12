@@ -1,7 +1,13 @@
+import { type FC } from "react";
 import ProductCard from "./ProductCard";
-import type { Product } from "../types";
+import type { Product, ProductIds } from "../types";
 
-function ProductGrid({ products, idList }: { products: Product[], idList: number[] }) {
+interface ProductGridProps {
+  products: Product[];
+  idList: ProductIds["products"];
+}
+
+const ProductGrid: FC<ProductGridProps> = ({ products, idList }) => {
   return (
     <div className="gap-4 md:gap-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 my-4">
       {products.map(function (item) {

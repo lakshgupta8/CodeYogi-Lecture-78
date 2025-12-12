@@ -1,3 +1,4 @@
+import { type FC } from "react";
 import {
   HiOutlineUser,
   HiOutlineMail,
@@ -19,9 +20,11 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: keyof typeof iconMap;
   touched?: boolean;
   error?: string;
+  placeholder: string;
+  className?: string;
 }
 
-function Input({
+const Input: FC<InputProps> = ({
   id,
   name,
   placeholder,
@@ -29,7 +32,7 @@ function Input({
   touched,
   error,
   ...rest
-}: InputProps) {
+}) => {
   const icon = iconMap[name] || null;
 
   let borderClass =

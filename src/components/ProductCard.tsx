@@ -1,9 +1,20 @@
-import { memo } from "react";
+import { memo, type FC } from "react";
 import { Link, useLocation } from "react-router-dom";
 import StarRating from "./StarRating";
-import { type ProductCardProps } from "../types";
+import type { ProductIds } from "../types";
 
-function ProductCard({
+interface ProductCardProps {
+  id: number;
+  title: string;
+  category: string;
+  price: number;
+  discountPercentage: number;
+  thumbnail: string;
+  rating: number;
+  contextIdList: ProductIds["products"];
+};
+
+const ProductCard: FC<ProductCardProps> = ({
   id,
   title,
   category,
@@ -12,7 +23,7 @@ function ProductCard({
   thumbnail,
   rating,
   contextIdList,
-}: ProductCardProps) {
+}) => {
   const location = useLocation();
   const originalPrice = (price * 100) / (100 - discountPercentage);
 

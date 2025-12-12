@@ -1,10 +1,22 @@
+import { memo, type FC } from "react";
 import { Link, type Location } from "react-router-dom";
 import { HiOutlineShoppingBag, HiX } from "react-icons/hi";
-import { memo } from "react";
 
-function MobileMenu(props: { isOpen: boolean; onClose: () => void; navLinks: { name: string; to: string }[]; location: Location; count: number }) {
-  const { isOpen, onClose, navLinks, location, count } = props;
+interface MobileMenuProps {
+  isOpen: boolean;
+  onClose: () => void;
+  navLinks: { name: string; to: string }[];
+  location: Location;
+  count: number;
+}
 
+const MobileMenu: FC<MobileMenuProps> = ({
+  isOpen,
+  onClose,
+  navLinks,
+  location,
+  count,
+}) => {
   if (!isOpen) return null;
 
   return (

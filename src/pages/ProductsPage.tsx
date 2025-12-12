@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type FC } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import Filter from "../components/Filter";
 import ProductGrid from "../components/ProductGrid";
@@ -10,9 +10,9 @@ import {
   getProductIds,
   searchProductIds,
 } from "../api";
-import type { ProductList } from "../types";
+import type { ProductList, ProductIds } from "../types";
 
-function ProductsPage() {
+const ProductsPage: FC = () => {
   const [productData, setProductData] = useState<ProductList>({
     products: [],
     total: 0,
@@ -59,7 +59,7 @@ function ProductsPage() {
     [query, sortBy, order, page]
   );
 
-  const [idList, setIdList] = useState([]);
+  const [idList, setIdList] = useState<ProductIds["products"]>([]);
 
   useEffect(
     function () {

@@ -1,6 +1,7 @@
+import { type FC } from "react";
 import { Star } from "lucide-react";
 
-function StarRating({ rating }: { rating: number }) {
+const StarRating: FC<{ rating: number }> = ({ rating }) => {
   const fills = [...Array(5)].map(function (_, index) {
     return Math.min(Math.max(rating - index, 0), 1) * 100;
   });

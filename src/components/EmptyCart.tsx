@@ -1,8 +1,8 @@
-import { memo } from "react";
+import { memo, type FC } from "react";
 import { Link } from "react-router-dom";
 import emptycartimage from "/images/emptycart.svg";
 
-function EmptyCart() {
+const EmptyCart: FC = () => {
   return (
     <div className="flex flex-col items-center gap-4 mb-32 text-center">
       <img

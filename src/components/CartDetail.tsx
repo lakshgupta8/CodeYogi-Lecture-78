@@ -1,8 +1,9 @@
 import { useCart } from "../context/CartContext";
 import CartList from "./CartList";
 import CartTotals from "./CartTotals";
+import { type FC } from "react";
 
-function CartDetail() {
+const CartDetail: FC = () => {
   const { updateCart } = useCart();
 
   return (

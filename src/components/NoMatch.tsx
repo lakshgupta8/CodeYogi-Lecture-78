@@ -1,6 +1,12 @@
+import { type FC } from "react";
 import noresultimage from "/images/noresult.svg";
 
-function NoMatch({ searchQuery, onClearSearch }: { searchQuery: string, onClearSearch: () => void }) {
+type NoMatchProps = {
+  searchQuery: string;
+  onClearSearch: () => void;
+}
+
+const NoMatch: FC<NoMatchProps> = ({ searchQuery, onClearSearch }) => {
   return (
     <div className="flex flex-col items-center gap-4 text-center">
       <img

@@ -1,3 +1,4 @@
+import { type FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { withFormik } from "formik";
 import * as Yup from "yup";
@@ -5,7 +6,7 @@ import Input from "../components/Input";
 import { signupUser } from "../api";
 import { useUser } from "../context/UserContext";
 import { useAlert } from "../context/AlertContext";
-import type { AlertProps, User } from "../types";
+import type { FormikSubmitProps, FormProps } from "../types";
 
 const validationSchema = Yup.object().shape({
   Name: Yup.string().required("Name is required"),
@@ -33,7 +34,7 @@ const initialValues = {
   confirmPassword: "",
 };
 
-export const SignUpPageContent = ({
+const SignUpPageContent: FC<FormProps> = ({
   values,
   errors,
   touched,
@@ -42,32 +43,7 @@ export const SignUpPageContent = ({
   handleSubmit,
   isSubmitting,
   isValid,
-}:
-  {
-    values: {
-      Name: string;
-      email: string;
-      password: string;
-      confirmPassword: string;
-    };
-    errors: {
-      Name?: string;
-      email?: string;
-      password?: string;
-      confirmPassword?: string;
-    };
-    touched: {
-      Name?: boolean;
-      email?: boolean;
-      password?: boolean;
-      confirmPassword?: boolean;
-    };
-    handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
-    handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-    isSubmitting: boolean;
-    isValid: boolean;
-  }) => {
+}) => {
   return (
     <div
       className="flex justify-center items-center bg-cover bg-no-repeat bg-center w-full h-screen"
@@ -171,14 +147,16 @@ export const SignUpPageContent = ({
 const EnhancedSignUpPage = withFormik({
   mapPropsToValues: () => initialValues,
   validationSchema: validationSchema,
-  handleSubmit: (values, { setSubmitting, props }: { setSubmitting: (submitting: boolean) => void; props: { navigate: (to: string) => void; login: (user: User, token: string) => void; showAlert: (message: string, type: AlertProps["type"]) => void; }; }) => {
+  handleSubmit: (values, { setSubmitting, props }: FormikSubmitProps) => {
     const { navigate, login, showAlert } = props;
 
     signupUser(values.Name.split(" ")[0], values.email, values.password)
       .then(({ user, token }) => {
-        showAlert("Account created successfully", "success");
-        login(user, token);
-        navigate("/dashboard");
+        if (user && token) {
+          showAlert("Login successful", "success");
+          login?.(user, token);
+          navigate("/dashboard");
+        }
       })
       .catch((error) => {
         const errorMessage = error.message || "Signup failed";

@@ -1,10 +1,10 @@
-import { useState, useMemo, useCallback, useEffect } from "react";
+import { useState, useMemo, useCallback, useEffect, type FC } from "react";
 import { getProduct, saveCart, getCart } from "../api";
 import { CartContext } from "./CartContext";
 import { useUser } from "./UserContext";
 import { type Product, type Cartitems } from "../types";
 
-export default function CartProvider({ children }: { children: React.ReactNode }) {
+const CartProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isLoggedIn, token }: { isLoggedIn: boolean; token: string | null } = useUser();
   const [cartItems, setCartItems] = useState<Cartitems>(() => {
     const saved = localStorage.getItem("cartItems");
@@ -211,3 +211,5 @@ export default function CartProvider({ children }: { children: React.ReactNode }
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
+
+export default CartProvider;

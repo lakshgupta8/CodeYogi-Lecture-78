@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import { type User } from "../types";
 
-type UserContextType = {
+interface UserContextType {
   user: User | null;
   isLoggedIn: boolean;
   loading: boolean;

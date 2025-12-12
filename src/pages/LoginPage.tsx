@@ -1,3 +1,4 @@
+import { type FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { withFormik } from "formik";
 import * as Yup from "yup";
@@ -5,7 +6,7 @@ import Input from "../components/Input";
 import { useUser } from "../context/UserContext";
 import { useAlert } from "../context/AlertContext";
 import { signInUser } from "../api";
-import type { AlertProps, User } from "../types";
+import type { FormikSubmitProps, FormProps } from "../types";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -27,7 +28,7 @@ const initialValues = {
   password: "",
 };
 
-export const LoginPageContent = ({
+const LoginPageContent: FC<FormProps> = ({
   values,
   errors,
   touched,
@@ -36,15 +37,6 @@ export const LoginPageContent = ({
   handleSubmit,
   isSubmitting,
   isValid,
-}: {
-  values: { email: string; password: string };
-  errors: { email?: string; password?: string };
-  touched: { email?: boolean; password?: boolean };
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  isSubmitting: boolean;
-  isValid: boolean;
 }) => {
   return (
     <div
@@ -131,13 +123,15 @@ export const LoginPageContent = ({
 const EnhancedLoginPage = withFormik({
   mapPropsToValues: () => initialValues,
   validationSchema: validationSchema,
-  handleSubmit: (values, { setSubmitting, props }: { setSubmitting: (submitting: boolean) => void; props: { navigate: (to: string) => void; login: (user: User, token: string) => void; showAlert: (message: string, type: AlertProps["type"]) => void; }; }) => {
+  handleSubmit: (values, { setSubmitting, props }: FormikSubmitProps) => {
     const { navigate, login, showAlert } = props;
     signInUser(values.email, values.password)
       .then(({ user, token }) => {
-        showAlert("Login successful", "success");
-        login(user, token);
-        navigate("/dashboard");
+        if (user && token) {
+          showAlert("Login successful", "success");
+          login?.(user, token);
+          navigate("/dashboard");
+        }
       })
       .catch((error) => {
         const errorMessage = error.message || "Login failed";

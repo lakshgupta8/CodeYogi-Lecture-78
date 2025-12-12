@@ -1,9 +1,10 @@
+import { type FC } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAlert } from "../context/AlertContext";
 import { withFormik } from "formik";
 import * as Yup from "yup";
 import Input from "../components/Input";
-import { type AlertProps } from "../types";
+import type { FormikSubmitProps, FormProps } from "../types";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -15,7 +16,7 @@ const initialValues = {
   email: "",
 };
 
-export const ForgotPasswordPageContent = ({
+const ForgotPasswordPageContent: FC<FormProps> = ({
   values,
   errors,
   touched,
@@ -24,15 +25,6 @@ export const ForgotPasswordPageContent = ({
   handleSubmit,
   isSubmitting,
   isValid,
-}: {
-  values: { email: string };
-  errors: { email?: string };
-  touched: { email?: boolean };
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  isSubmitting: boolean;
-  isValid: boolean;
 }) => {
   return (
     <div
@@ -94,7 +86,7 @@ export const ForgotPasswordPageContent = ({
 const EnhancedForgotPasswordPage = withFormik({
   mapPropsToValues: () => initialValues,
   validationSchema: validationSchema,
-  handleSubmit: (values, { setSubmitting, props }: { setSubmitting: (submitting: boolean) => void; props: { navigate: (to: string) => void; showAlert: (message: string, type?: AlertProps["type"]) => void; }; }) => {
+  handleSubmit: (values, { setSubmitting, props }: FormikSubmitProps) => {
     const { navigate, showAlert } = props;
     showAlert(`Password reset link sent to ${values.email}`, "success");
     navigate("/login");

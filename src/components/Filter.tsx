@@ -1,7 +1,14 @@
-import { memo } from "react";
+import { memo, type FC } from "react";
 import Input from "./Input";
 
-function Filter({ query, sort, onSearch, onSort }: { query: string, sort: string, onSearch: (query: string) => void, onSort: (sort: string) => void }) {
+interface FilterProps {
+  query: string;
+  sort: string;
+  onSearch: (query: string) => void;
+  onSort: (sort: string) => void;
+}
+
+const Filter: FC<FilterProps> = ({ query, sort, onSearch, onSort }) => {
   return (
     <div className="flex sm:flex-row flex-col sm:justify-between gap-3 text-gray-600 text-xs">
       <Input

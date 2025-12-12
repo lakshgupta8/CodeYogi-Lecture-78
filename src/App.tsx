@@ -13,7 +13,7 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import ProductsPage from "./pages/ProductsPage";
 import SignUpPage from "./pages/SignUpPage";
 
-const App = () => {
+const App: React.FC = () => {
   const location = useLocation();
 
   const isLoginPage =
